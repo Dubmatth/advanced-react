@@ -18,6 +18,7 @@ const ALL_ITEMS_QUERY = gql`
     }
   }
 `;
+
 const Center = styled.div`
   text-align: center;
 `;
@@ -37,14 +38,14 @@ class Items extends Component {
         <Pagination page={this.props.page} />
         <Query
           query={ALL_ITEMS_QUERY}
-          /* fetchPolicy="network-only" */
+          // fetchPolicy="network-only"
           variables={{
             skip: this.props.page * perPage - perPage,
           }}
         >
           {({ data, error, loading }) => {
             if (loading) return <p>Loading...</p>;
-            if (error) return <p>{error.message}</p>;
+            if (error) return <p>Error: {error.message}</p>;
             return (
               <ItemsList>
                 {data.items.map(item => (
