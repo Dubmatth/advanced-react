@@ -1,5 +1,6 @@
 import withApollo from 'next-with-apollo';
 import ApolloClient from 'apollo-boost';
+import { privateEncrypt } from 'crypto';
 import { endpoint } from '../config';
 
 function createClient({ headers }) {
@@ -12,6 +13,13 @@ function createClient({ headers }) {
         },
         headers,
       });
+    },
+    // local data !
+    clientState: {
+      resolvers: {},
+      defaults: {
+        cartOpen: true,
+      },
     },
   });
 }

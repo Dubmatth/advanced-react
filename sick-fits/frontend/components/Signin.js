@@ -27,6 +27,7 @@ class Signin extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
     return (
       <Mutation
         mutation={SIGNIN_MUTATION}
@@ -51,7 +52,7 @@ class Signin extends Component {
                   type="email"
                   name="email"
                   placeholder="email"
-                  value={this.state.email}
+                  value={email}
                   onChange={this.saveToState}
                 />
               </label>
@@ -61,7 +62,7 @@ class Signin extends Component {
                   type="password"
                   name="password"
                   placeholder="password"
-                  value={this.state.password}
+                  value={password}
                   onChange={this.saveToState}
                 />
               </label>
