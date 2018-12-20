@@ -1,7 +1,7 @@
 import withApollo from 'next-with-apollo';
 import ApolloClient from 'apollo-boost';
-import { privateEncrypt } from 'crypto';
 import { endpoint } from '../config';
+import { LOCAL_STATE_QUERY } from '../components/Cart';
 
 function createClient({ headers }) {
   return new ApolloClient({
@@ -16,9 +16,25 @@ function createClient({ headers }) {
     },
     // local data !
     clientState: {
-      resolvers: {},
+      resolvers: {
+        Mutation: {
+          toggleCart(_, variables, { cache }) {
+            // 1. Read the cart open value from the cache
+            const { cartOpen } = cache.readQuery({
+              query: LOCAL_STATE_QUERY,
+            });
+            console.log(cartOpen);
+            // 2. Wire the cart state to the opposite
+            const data = {
+              data: { cartOpen: !cartOpen },
+            };
+            cache.writeData(data);
+            return data;
+          },
+        },
+      },
       defaults: {
-        cartOpen: true,
+        cartOpen: false,
       },
     },
   });
