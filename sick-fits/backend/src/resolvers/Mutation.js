@@ -99,7 +99,10 @@ const Mutations = {
       throw new Error('Invalid Password!');
     }
     // 3. generate the JWT Token
-    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    const token = jwt.sign(
+      { userId: user.id, mouche: 'ma mouche' },
+      process.env.APP_SECRET
+    );
     // 4. Set the cookie with the token
     ctx.response.cookie('token', token, {
       httpOnly: true,
@@ -202,6 +205,45 @@ const Mutations = {
         },
         where: {
           id: args.userId,
+        },
+      },
+      info
+    );
+  },
+  async addToCart(parent, args, ctx, info) {
+    // 1. Make sur they are signed in
+    const { userId } = ctx.request;
+    if (!userId) {
+      throw new Error('You must be signed in sooonn !');
+    }
+    // 2. Query the users current cart
+    const [existingCartItem] = await ctx.db.query.cartItems({
+      where: {
+        user: { id: userId },
+        item: { id: args.id },
+      },
+    });
+    // 3. check if that item is already in their cart and increment by 1 if it is
+    if (existingCartItem) {
+      console.log('This is already in their cart');
+      return ctx.db.mutation.updateCartItem(
+        {
+          where: { id: existingCartItem.id },
+          data: { quantity: existingCartItem.quantity + 1 },
+        },
+        info
+      );
+    }
+    // 4. If its not, create a fresh CartItem for that user
+    return ctx.db.mutation.createCartItem(
+      {
+        data: {
+          user: {
+            connect: { id: userId },
+          },
+          item: {
+            connect: { id: args.id },
+          },
         },
       },
       info
