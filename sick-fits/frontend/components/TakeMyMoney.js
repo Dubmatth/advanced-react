@@ -47,30 +47,35 @@ export default class TakeMyMoney extends React.Component {
     const { children } = this.props;
     return (
       <User>
-        {({ data: { me } }) => (
-          <Mutation
-            mutation={CREATE_ORDER_MUTATION}
-            refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-          >
-            {createOrder => (
-              <StripCheckout
-                amount={calcTotalPrice(me.cart)}
-                name="Sick Fits"
-                description={`Order of ${totalItems(me.cart)} items`}
-                image={
-                  me.cart.length && me.cart[0].item && me.cart[0].item.image
-                }
-                stripeKey="pk_test_eNgX8DOxVTZl9f95BP18Ljuk"
-                currency="EUR"
-                email={me.email}
-                token={res => this.onToken(res, createOrder)}
-              >
-                {children}
-              </StripCheckout>
-            )}
-          </Mutation>
-        )}
+        {({ data: { me }, loading }) => {
+          if (loading) return null;
+          return (
+            <Mutation
+              mutation={CREATE_ORDER_MUTATION}
+              refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+            >
+              {createOrder => (
+                <StripCheckout
+                  amount={calcTotalPrice(me.cart)}
+                  name="Sick Fits"
+                  description={`Order of ${totalItems(me.cart)} items`}
+                  image={
+                    me.cart.length && me.cart[0].item && me.cart[0].item.image
+                  }
+                  stripeKey="pk_test_eNgX8DOxVTZl9f95BP18Ljuk"
+                  currency="EUR"
+                  email={me.email}
+                  token={res => this.onToken(res, createOrder)}
+                >
+                  {children}
+                </StripCheckout>
+              )}
+            </Mutation>
+          );
+        }}
       </User>
     );
   }
 }
+
+export { CREATE_ORDER_MUTATION };

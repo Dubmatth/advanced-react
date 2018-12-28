@@ -89,3 +89,5 @@ export default class Order extends Component {
     );
   }
 }
+
+export { SINGLE_ORDER_QUERY };
