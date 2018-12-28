@@ -56,9 +56,11 @@ const Permissions = props => (
               </tr>
             </thead>
             <tbody>
-              {data.users.map(user => (
-                <UserPermission key={user.id} user={user} />
-              ))}
+              {data &&
+                data.users &&
+                data.users.map(user => (
+                  <UserPermissions user={user} key={user.id} />
+                ))}
             </tbody>
           </Table>
         </div>
@@ -67,7 +69,7 @@ const Permissions = props => (
   </Query>
 );
 
-class UserPermission extends React.Component {
+class UserPermissions extends React.Component {
   static propTypes = {
     user: PropTypes.shape({
       id: PropTypes.string,
