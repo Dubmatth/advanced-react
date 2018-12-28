@@ -28,10 +28,11 @@ type Query {
   orders(orderBy: OrderOrderByInput): [Order]!
 }
 
-type User {
+type User{
   id: ID!
   name: String!
   email: String!
   permissions: [Permission!]!
   cart: [CartItem!]!
+  orders: [OrderItem]
 }
