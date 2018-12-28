@@ -20,8 +20,8 @@ const SIGNUP_MUTATION = gql`
 
 export default class Signup extends Component {
   state = {
-    email: '',
     name: '',
+    email: '',
     password: '',
   };
 
@@ -39,7 +39,6 @@ export default class Signup extends Component {
             onSubmit={async e => {
               e.preventDefault();
               const res = await signup();
-              console.log(res);
               this.setState({ name: '', email: '', password: '' });
             }}
           >
