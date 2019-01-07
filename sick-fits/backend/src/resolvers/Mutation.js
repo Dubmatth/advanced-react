@@ -131,6 +131,7 @@ const Mutations = {
       data: { resetToken, resetTokenExpiry },
     });
     // Email then that reset token
+    console.log(`Bonjour Patrick, je suis ton token : ${resetToken}`);
     const mailRes = await transport.sendMail({
       from: 'contact@duboismatthieu.be',
       to: user.email,
