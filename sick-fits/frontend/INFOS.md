@@ -41,6 +41,11 @@ Infos Patrick Marthus
           * Login: patrickmarthus@best.be
           * Password: patrick
 
+      * Reset mot de pass:
+          * Le reset de mot de pass envoi l'email directement dans ma boite email mailtrap. (Qui est lié à mon compte github)
+          * Si tu veux tester cette fonctionnalité, j'ai ajouté un console log du token (dans la console backend) au moment ou tu demande un reset avec l'email, il te suffira après d'ajouter le token manuellement à la fin de l'url si dessous, ce qui te permettra de changer de mot de pass.
+            Url : http://localhost:7777/reset?resetToken=ICILETOKEN
+
     * Permissions:
 
       * en te rendant sur la page /permissions, (si tu es log avec le compte admin), tu pourras voir un petit menu avec les différentes permissions possibles, elles peuvent-être assignées directement au check de la box ou après avoir cliqué sur Update.
@@ -53,29 +58,47 @@ Infos Patrick Marthus
 
     * Les tests sont effecutés avec Jest. J'ai vraiment appréciés découvrir cette partie du développement qui, je pense, est essentiel  sur de gros projet.
 
-5. Liens utiles
-
-    * React : https://reactjs.org/ (Framework JS)
-    * Apollo :  https://www.apollographql.com/
-    * Prisma : https://www.prisma.io/ (Fourni un ensemble d'actions CRUD mais sans logic)
-    * GraphQL Yoga : https://github.com/prisma/graphql-yoga
-    * Heroku : https://www.heroku.com/ (PaaS hébergement )
-    * Jest : https://jestjs.io/
-    * Mailtrap : https://mailtrap.io (Envoi d'emails quand on travail en local)
-
-6. La Stack technique
+5. La Stack technique
 
     * React :
 
-      React est basé sur virtual-dom : un composant React ne crée pas de HTML mais une représentation sous forme d’objets et de nœuds de ce à quoi le HTML final doit ressembler. Virtual-dom va prendre en compte cette représentation, la comparer au DOM réel et en déduire les opérations minimales à exécuter pour que le DOM réel soit conforme au virtuel. C’est grâce à cet outil que React peut partir du principe qu’il est plus simple de “remplacer” toute l’interface quand elle doit être modifiée plutôt que de modifier au fur et à mesure le DOM comme jQuery ou AngularJS pouvaient le faire. L’intérêt de cette approche est assez simple. On reproche souvent à JavaScript d’être lent alors que c’est DOM qui l’est. Avoir une représentation sous forme d’arbre en JavaScript permet de réaliser beaucoup plus d’opérations, d’utiliser les meilleurs algorithmes de comparaison d’arbres et, cerise sur le gâteau, de faire toutes les modifications du DOM en une opération plutôt qu’au fur et à mesure. Virtual-dom est également bien plus facile à mettre à jour et à améliorer que les différentes implémentations de DOM dans les navigateurs.
+      React est basé sur virtual-dom : un composant React ne crée pas de HTML mais une représentation sous forme d’objets et de nœuds de ce à quoi le HTML final doit ressembler. Virtual-dom va prendre en compte cette représentation, la comparer au DOM réel et en déduire les opérations minimales à exécuter pour que le DOM réel soit conforme au virtuel. C’est grâce à cet outil que React peut partir du principe qu’il est plus simple de “remplacer” toute l’interface quand elle doit être modifiée plutôt que de modifier au fur et à mesure le DOM comme jQuery ou AngularJS pouvaient le faire.
 
     * Apollo Client :
 
-      Apollo Client est un client GraphQL sophistiqué qui gère les données et l’état dans une application. Entre autres avantages, il permet un style de programmation déclaratif permettant aux développeurs de définir des requêtes dans le cadre de composants d'interface utilisateur. le client gère tous les détails difficiles des résultats de la requête liés à l'interface utilisateur, en gérant la cohérence, la mise en cache, etc.
+      Apollo Client est un client GraphQL qui gère les données et l’état dans une application(Autre exemple Redux). Entre autres avantages, il permet un style de programmation déclaratif permettant aux développeurs de définir des requêtes dans le cadre de composants d'interface utilisateur. le client gère tous les détails difficiles des résultats de la requête liés à l'interface utilisateur, en gérant la cohérence, la mise en cache, etc.
 
     * Prisma :
 
+      Prisma élimine le besoin d'écrire manuellement les opérations CRUD. On se concentre sur les fonctionnalités plutôt que de faire un travail répétitif.
+      Dans ce projet j'utilise le serveur de demo proposé par prisma où est inclus la base de données.
+
+    * GraphQL Yoga :
+
+      Serveur GraphQL complet, axé sur une configuration facile, des performances et une expérience exceptionnelle des développeurs
+
+    * Heroku :
+
+      Heroku est une PaaS (plateforme en tant que service) permettant de déployer des applications sur le Cloud. A la façon dont un hébergeur web propose d’héberger un site web sur ses propres serveurs, cette solution vous permet de déployer votre application sur le Cloud pour permettre aux internautes de l’utiliser.
+
+    * Jest :
+
+      Jest est utilisé par Facebook pour tester tout le code JavaScript, y compris les applications React. L'une des philosophies de Jest est de fournir une expérience intégrée "configuration zéro". Nous avons constaté que lorsque les ingénieurs disposent d'outils prêts à l'emploi, ils finissent par écrire davantage de tests, ce qui aboutit à des bases de code plus stables et plus saines.
+
+    * Mailtrap :
+
+      Mailtrap simule le travail d'un vrai serveur SMTP. Il isole l’e-mailing intermédiaire de la production et élimine toute possibilité qu'un email de test termine sa course dans la boîte mail d’un client
 
 
+6. Liens utiles
+
+    * Le site : https://sickfits-nextt-prod.herokuapp.com/ (lent au premier chargement, j'ai l'impression que les serveurs sont en veille si il n'y a pas eu de visiteur depuis un certain temps)
+    * React : https://reactjs.org/
+    * Apollo :  https://www.apollographql.com/
+    * Prisma : https://www.prisma.io/
+    * GraphQL Yoga : https://github.com/prisma/graphql-yoga
+    * Heroku : https://www.heroku.com/
+    * Jest : https://jestjs.io/
+    * Mailtrap : https://mailtrap.io
 
 
