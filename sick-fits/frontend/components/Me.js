@@ -7,6 +7,7 @@ const Me = () => (
   <User>
     {({ data: { me }, error }) => {
       if (error) return <Error error={error} />;
+      if (!me) return null;
       return (
         <Form>
           <fieldset>
